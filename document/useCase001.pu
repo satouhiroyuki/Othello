@@ -1,0 +1,14 @@
+@startuml
+
+actor Player1
+actor Player2
+
+Player1 -> (Create Game)
+(Join Game) <. Player2
+(Create Game) ..> (Join Game)
+(Join Game) ..> (Game Start)
+(Game Start) ..> (Othello Push) 
+Player1 -> (Othello Push)
+Player2 -> (Othello Push)
+
+@enduml
