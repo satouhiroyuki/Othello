@@ -69,7 +69,5 @@ function onbuttonClick(col,row){
 
     var nextPlayer = changePlayer(playerNo);
     document.getElementById("Player").innerHTML=nextPlayer;
-
-    setBoardItem();
 }
 
