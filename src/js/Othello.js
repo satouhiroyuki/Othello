@@ -11,12 +11,17 @@ function initBoard(boardSize){
         othelloBoard[y] = new Array(boardSize).fill(0);
     }
 
+    settingBoard(boardSize);
+
     return true;
 }
 
 //初期化した後にゲームができるように盤面にオセロを配置する
-function settingBoard(){
-
+function settingBoard(boardSize){
+    setBoard(3,3,1);
+    setBoard(3,4,2);
+    setBoard(4,3,2);
+    setBoard(4,4,1);
 }
 
 //盤面のオセロの状況を確認する
@@ -53,12 +58,26 @@ function changePlayer(player){
     return nextPlayer;
 }
 
+function reflushBoardItem(){
+    for(col=0;col< othelloBoard.length;col++){
+        var board = othelloBoard[col];
+        for(row=0;row<board.length;row++){
+            if(board[row] == 1)
+                document.getElementById("btn"+col+row).innerHTML="○";
+            else if(board[row] == 2)
+                document.getElementById("btn"+col+row).innerHTML="●";
+            else
+                document.getElementById("btn"+col+row).innerHTML="　";
+        }
+    }
+}
 
 //Jasmineのtestにはexportが必要になるらしい
 exports.initBoard = initBoard;
 exports.getBoard = getBoard;
 exports.setBoard = setBoard;
 exports.changePlayer = changePlayer;
+exports.settingBoard = settingBoard;
 
 //event
 function onbuttonClick(col,row){
@@ -69,5 +88,9 @@ function onbuttonClick(col,row){
 
     var nextPlayer = changePlayer(playerNo);
     document.getElementById("Player").innerHTML=nextPlayer;
+}
+
+function onLoad(){
+    reflushBoardItem();
 }
 

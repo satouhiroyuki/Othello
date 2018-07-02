@@ -46,4 +46,18 @@
             expect(testJs.changePlayer(1)).toBe(2);
         });
     });
+
+    //testCode
+    describe('this test is settingBoard',function(){
+        it('testCase', function(){
+            expect(testJs.initBoard(8)).toBeDefined();
+            expect(testJs.settingBoard).toBeDefined();
+
+            expect(testJs.settingBoard(8));
+            expect(testJs.getBoard(3,3)).toBe(1);
+            expect(testJs.getBoard(3,4)).toBe(2);
+            expect(testJs.getBoard(4,4)).toBe(1);
+            expect(testJs.getBoard(4,3)).toBe(2);
+        });
+    });
 })();
