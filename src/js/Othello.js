@@ -53,15 +53,6 @@ function changePlayer(player){
     return nextPlayer;
 }
 
-//補助ファンクション：置ける場所の把握のために記述
-function setBoardItem(){
-    for(col=0;col< othelloBoard.length;col++){
-        var board = othelloBoard[col];
-        for(row=0;row<board.length;row++){
-            document.getElementById("td"+col+row).innerHTML=board[row];
-        }
-    }
-}
 
 //Jasmineのtestにはexportが必要になるらしい
 exports.initBoard = initBoard;
