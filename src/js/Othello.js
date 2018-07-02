@@ -3,8 +3,7 @@ var othelloBoard;
 var othelloBoardRows;
 
 //盤面をまっさらに初期化する
-function initBoard(){
-    var boardSize = 4;
+function initBoard(boardSize){
 
     othelloBoard = new Array(boardSize);
 

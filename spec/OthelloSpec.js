@@ -4,8 +4,8 @@
     //testCode
     describe('this test is Othello.js',function(){
         it('testCase', function(){
-            expect(testJs.initBoard).toBeDefined();
-            expect(testJs.initBoard()).toBe(true);
+            expect(testJs.initBoard(8)).toBeDefined();
+            expect(testJs.initBoard(8)).toBe(true);
         });
         it('testCase', function(){
             expect(testJs.getBoard).toBeDefined();
@@ -16,22 +16,24 @@
     //testCode
     describe('this test is set Player1',function(){
         it('testCase', function(){
-            expect(testJs.initBoard).toBeDefined();
+            expect(testJs.initBoard(8)).toBeDefined();
             expect(testJs.setBoard).toBeDefined();
-
-            expect(testJs.setBoard(3,3,1));
-            expect(testJs.getBoard(3,3)).toBe(1);
+        });
+        it('last argument set value', function(){
+            expect(testJs.setBoard(7,7,1));
+            expect(testJs.getBoard(7,7)).toBe(1);
         });
     });
 
     //testCode
     describe('this test is set Player2',function(){
         it('testCase', function(){
-            expect(testJs.initBoard).toBeDefined();
+            expect(testJs.initBoard(8)).toBeDefined();
             expect(testJs.setBoard).toBeDefined();
-
-            expect(testJs.setBoard(3,3,2));
-            expect(testJs.getBoard(3,3)).toBe(2);
+        });
+        it('last argument set value', function(){
+            expect(testJs.setBoard(7,7,2));
+            expect(testJs.getBoard(7,7)).toBe(2);
         });
     });
 
