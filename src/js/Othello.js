@@ -18,6 +18,14 @@ function initBoard(boardSize){
 
 //初期化した後にゲームができるように盤面にオセロを配置する
 function settingBoard(boardSize){
+
+    for(col=0;col< othelloBoard.length;col++){
+        var board = othelloBoard[col];
+        for(row=0;row<board.length;row++){
+            board[row]=0;
+        }
+    }
+
     setBoard(3,3,1);
     setBoard(3,4,2);
     setBoard(4,3,2);
@@ -58,7 +66,9 @@ function changePlayer(player){
     return nextPlayer;
 }
 
-function reflushBoardItem(){
+function reflushBoardItem(boardSize){
+    settingBoard(boardSize);
+
     for(col=0;col< othelloBoard.length;col++){
         var board = othelloBoard[col];
         for(row=0;row<board.length;row++){

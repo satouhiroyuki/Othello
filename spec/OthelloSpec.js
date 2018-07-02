@@ -60,4 +60,15 @@
             expect(testJs.getBoard(4,3)).toBe(2);
         });
     });
+
+    //testCode
+    describe('this test is settingBoard',function(){
+        it('testCase', function(){
+            expect(testJs.initBoard(8));
+            expect(testJs.setBoard(7,7,2));
+
+            expect(testJs.settingBoard(8));
+            expect(testJs.getBoard(7,7)).toBe(0);
+        });
+    });
 })();
