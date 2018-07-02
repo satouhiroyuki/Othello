@@ -66,6 +66,66 @@ function changePlayer(player){
     return nextPlayer;
 }
 
+function putOthello(col,row,player){
+
+    return canPutOthello(col,row,player);
+}
+
+function canPutOthello(col,row,player){
+
+    var board = othelloBoard[col];
+    var opponent;
+    var rowJug = false;
+
+    //対戦相手を判定
+    if(player==1)
+        opponent=2;
+    else if(player==2)
+        opponent=1;
+
+    //すでにオセロが置かれている場合、falseを返す
+    if(board[row]==player || board[row]==opponent){
+        return false;
+    }
+    
+    //
+    for(rowNo=row-1;0<=rowNo;rowNo--){
+        var no = board[rowNo];
+
+        if(no==0)
+            break;
+        else if(no==opponent && rowJug==false){
+            rowJug = true;
+        }
+        else if(no==player && rowJug== false){
+            break;
+        }
+        else if(no==player && rowJug==true){
+            return true;
+        }
+    }
+
+    rowJug=false;
+    for(rowNo=row+1;rowNo<board.length;rowNo++){
+        var no = board[rowNo];
+
+        if(no==0)
+            break;
+        else if(no==opponent && rowJug==false){
+            rowJug = true;
+        }
+        else if(no==player && rowJug== false){
+            break;
+        }
+        else if(no==player && rowJug==true){
+            return true;
+        }
+    }
+
+    return false;
+}
+
+
 function reflushBoardItem(boardSize){
     settingBoard(boardSize);
 
@@ -88,6 +148,8 @@ exports.getBoard = getBoard;
 exports.setBoard = setBoard;
 exports.changePlayer = changePlayer;
 exports.settingBoard = settingBoard;
+exports.putOthello = putOthello;
+exports.canPutOthello = canPutOthello;
 
 //event
 function onbuttonClick(col,row){

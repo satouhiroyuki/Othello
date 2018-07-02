@@ -64,11 +64,40 @@
     //testCode
     describe('this test is settingBoard',function(){
         it('testCase', function(){
-            expect(testJs.initBoard(8));
-            expect(testJs.setBoard(7,7,2));
+            testJs.initBoard(8);
+            testJs.setBoard(7,7,2);
 
             expect(testJs.settingBoard(8));
             expect(testJs.getBoard(7,7)).toBe(0);
+        });
+    });
+
+    //testCode
+    describe('this test is putOthello',function(){
+        it('testCase', function(){
+            testJs.initBoard(8);
+            testJs.settingBoard(8);
+
+            expect(testJs.putOthello(7,7,1)).toBe(false);
+        });
+    });
+    //testCode
+    describe('this test is canPutOthello',function(){
+        it('testCase', function(){
+            testJs.initBoard(8);
+            testJs.settingBoard(8);
+
+            expect(testJs.putOthello(3,2,1)).toBe(false);
+            expect(testJs.putOthello(3,3,1)).toBe(false);
+            expect(testJs.putOthello(3,4,1)).toBe(false);
+            expect(testJs.putOthello(3,5,1)).toBe(true);
+            expect(testJs.putOthello(3,6,1)).toBe(false);
+
+            expect(testJs.putOthello(4,2,1)).toBe(true);
+            expect(testJs.putOthello(4,3,1)).toBe(false);
+            expect(testJs.putOthello(4,4,1)).toBe(false);
+            expect(testJs.putOthello(4,5,1)).toBe(false);
+            expect(testJs.putOthello(4,6,1)).toBe(false);
         });
     });
 })();
