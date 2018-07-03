@@ -71,7 +71,94 @@ function putOthello(col,row,player){
     var daiVal = canPutOthelloDiagonal(col,row,player);
     var rowVal = canPutOthelloRow(col,row,player);
     var colVal = canPutOthelloCol(col,row,player);
-    return daiVal || rowVal || colVal;
+    var daiVal2 = canPutOthelloDiagonal2(col,row,player);
+    return daiVal || daiVal2 || rowVal || colVal;
+}
+
+function canPutOthelloDiagonal2(col,row,player){
+    //y軸を対象に射影して、判定ロジックをDiagonalと同じくする
+    var othelloBoardDia = new Array(othelloBoard[col].length);
+
+    for(num=0;num<othelloBoard[col].length;num++){
+        var j=0;
+        var tempBoard = new Array(othelloBoard[num].length);
+        for(i=othelloBoard[col].length-1;0<i;i--){
+            tempBoard[j] = othelloBoard[num][i];
+            j++;
+        }
+        othelloBoardDia[num] = tempBoard;
+    } 
+    rowDia = othelloBoardDia[col].length - row -1;
+
+    //対角線のマスは最大8マス：行と列の引き算分だけ対角線のマスが減る
+    var len = othelloBoardDia[col].length - Math.abs(col-rowDia) - 1;
+    var board = new Array(len);
+    var opponent;
+    var colJug = false;
+
+    if(col < rowDia){
+        for(i=0;i<len;i++){
+            board[i] = othelloBoardDia[i][i+1]; 
+        }
+    }
+    else if(col==rowDia){
+        for(i=0;i<len;i++){
+            board[i] = othelloBoardDia[i][i]; 
+        }
+    }
+    else{
+        for(i=0;i<len;i++){
+            board[i] = othelloBoardDia[i+1][i];
+        }
+    }
+
+    //対戦相手を判定
+    if(player==1)
+        opponent=2;
+    else if(player==2)
+        opponent=1;
+
+    //すでにオセロが置かれている場合、falseを返す
+    if(board[col]==player || board[col]==opponent){
+        return false;
+    }
+    
+    //左方向を確認する
+    for(colNo=col-1;0<=colNo;colNo--){
+        var no = board[colNo];
+
+        if(no==0)
+            break;
+        else if(no==opponent && colJug==false){
+            colJug = true;
+        }
+        else if(no==player && colJug== false){
+            break;
+        }
+        else if(no==player && colJug==true){
+            return true;
+        }
+    }
+
+    colJug=false;
+    //右方向を確認する
+    for(colNo=col+1;colNo<board.length;colNo++){
+        var no = board[colNo];
+
+        if(no==0)
+            break;
+        else if(no==opponent && colJug==false){
+            colJug = true;
+        }
+        else if(no==player && colJug== false){
+            break;
+        }
+        else if(no==player && colJug==true){
+            return true;
+        }
+    }
+
+    return false;
 }
 
 function canPutOthelloDiagonal(col,row,player){

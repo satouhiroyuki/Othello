@@ -178,4 +178,37 @@
             expect(testJs.putOthello(5,6,1)).toBe(false);
         });
     });
+    //testCode
+    describe('this test is canPutOthello',function(){
+        it('testCase:Diagonal2', function(){
+            testJs.initBoard(8);
+            testJs.settingBoard(8);
+            testJs.setBoard(2,4,1);
+            testJs.setBoard(3,4,1);
+
+            expect(testJs.putOthello(2,2,2)).toBe(false);
+            expect(testJs.putOthello(2,3,2)).toBe(true);
+            expect(testJs.putOthello(2,4,2)).toBe(false);
+            expect(testJs.putOthello(2,5,2)).toBe(true);
+            expect(testJs.putOthello(2,6,2)).toBe(false);
+
+            expect(testJs.putOthello(3,2,2)).toBe(false);
+            expect(testJs.putOthello(3,3,2)).toBe(false);
+            expect(testJs.putOthello(3,4,2)).toBe(false);
+            expect(testJs.putOthello(3,5,2)).toBe(false);
+            expect(testJs.putOthello(3,6,2)).toBe(false);
+
+            expect(testJs.putOthello(4,2,2)).toBe(false);
+            expect(testJs.putOthello(4,3,2)).toBe(false);
+            expect(testJs.putOthello(4,4,2)).toBe(false);
+            expect(testJs.putOthello(4,5,2)).toBe(true);
+            expect(testJs.putOthello(4,6,2)).toBe(false);
+
+            expect(testJs.putOthello(5,2,2)).toBe(false);
+            expect(testJs.putOthello(5,3,2)).toBe(false);
+            expect(testJs.putOthello(5,4,2)).toBe(false);
+            expect(testJs.putOthello(5,5,2)).toBe(false);
+            expect(testJs.putOthello(5,6,2)).toBe(false);
+        });
+    });
 })();
