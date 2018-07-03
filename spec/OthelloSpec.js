@@ -86,6 +86,11 @@
         it('testCase', function(){
             testJs.initBoard(8);
             testJs.settingBoard(8);
+            expect(testJs.putOthello(2,2,1)).toBe(false);
+            expect(testJs.putOthello(2,3,1)).toBe(false);
+            expect(testJs.putOthello(2,4,1)).toBe(true);
+            expect(testJs.putOthello(2,5,1)).toBe(false);
+            expect(testJs.putOthello(2,6,1)).toBe(false);
 
             expect(testJs.putOthello(3,2,1)).toBe(false);
             expect(testJs.putOthello(3,3,1)).toBe(false);
@@ -98,6 +103,12 @@
             expect(testJs.putOthello(4,4,1)).toBe(false);
             expect(testJs.putOthello(4,5,1)).toBe(false);
             expect(testJs.putOthello(4,6,1)).toBe(false);
+
+            expect(testJs.putOthello(5,2,1)).toBe(false);
+            expect(testJs.putOthello(5,3,1)).toBe(true);
+            expect(testJs.putOthello(5,4,1)).toBe(false);
+            expect(testJs.putOthello(5,5,1)).toBe(false);
+            expect(testJs.putOthello(5,6,1)).toBe(false);
         });
     });
 })();
