@@ -68,7 +68,82 @@ function changePlayer(player){
 
 function putOthello(col,row,player){
 
-    return canPutOthelloRow(col,row,player) || canPutOthelloCol(col,row,player);
+    var daiVal = canPutOthelloDiagonal(col,row,player);
+    var rowVal = canPutOthelloRow(col,row,player);
+    var colVal = canPutOthelloCol(col,row,player);
+    return daiVal || rowVal || colVal;
+}
+
+function canPutOthelloDiagonal(col,row,player){
+    //対角線のマスは最大8マス：行と列の引き算分だけ対角線のマスが減る
+    var len = othelloBoard[col].length - Math.abs(col-row) - 1;
+    var board = new Array(len);
+    var opponent;
+    var colJug = false;
+
+    if(col < row){
+        for(i=0;i<len;i++){
+            board[i] = othelloBoard[i][i+1]; 
+        }
+    }
+    else if(col==row){
+        for(i=0;i<len;i++){
+            board[i] = othelloBoard[i][i]; 
+        }
+    }
+    else{
+        for(i=0;i<len;i++){
+            board[i] = othelloBoard[i+1][i];
+        }
+    }
+
+    //対戦相手を判定
+    if(player==1)
+        opponent=2;
+    else if(player==2)
+        opponent=1;
+
+    //すでにオセロが置かれている場合、falseを返す
+    if(board[col]==player || board[col]==opponent){
+        return false;
+    }
+    
+    //左方向を確認する
+    for(colNo=col-1;0<=colNo;colNo--){
+        var no = board[colNo];
+
+        if(no==0)
+            break;
+        else if(no==opponent && colJug==false){
+            colJug = true;
+        }
+        else if(no==player && colJug== false){
+            break;
+        }
+        else if(no==player && colJug==true){
+            return true;
+        }
+    }
+
+    colJug=false;
+    //右方向を確認する
+    for(colNo=col+1;colNo<board.length;colNo++){
+        var no = board[colNo];
+
+        if(no==0)
+            break;
+        else if(no==opponent && colJug==false){
+            colJug = true;
+        }
+        else if(no==player && colJug== false){
+            break;
+        }
+        else if(no==player && colJug==true){
+            return true;
+        }
+    }
+
+    return false;
 }
 
 function canPutOthelloRow(col,row,player){
@@ -183,7 +258,6 @@ function canPutOthelloCol(col,row,player){
 
     return false;
 }
-
 
 function reflushBoardItem(boardSize){
     settingBoard(boardSize);
