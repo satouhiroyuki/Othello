@@ -19,6 +19,7 @@ function initBoard(boardSize){
 //初期化した後にゲームができるように盤面にオセロを配置する
 function settingBoard(boardSize){
 
+    //ボードからオセロを取り除く
     for(col=0;col< othelloBoard.length;col++){
         var board = othelloBoard[col];
         for(row=0;row<board.length;row++){
@@ -26,6 +27,7 @@ function settingBoard(boardSize){
         }
     }
 
+    //最初のオセロを配列に設定する
     setBoard(3,3,1);
     setBoard(3,4,2);
     setBoard(4,3,2);
@@ -40,39 +42,18 @@ function getBoard(col,row){
 }
 
 function setBoard(col,row,player){
-    var board = othelloBoard[col];
-    board[row] = player;
-
-    if(player == 1){
-        var boardString = "○";
-    }
-    else if(player == 2){
-        var boardString = "●";
-    }
-
-    return boardString;
+    othelloBoard[col][row] = player;
 }
 
-function changePlayer(player){
-    var nextPlayer = player;
-
-    if(player == 1){
-        nextPlayer = 2;
-    }
-    else if(player == 2){
-        nextPlayer = 1;
-    }
-
-    return nextPlayer;
-}
-
-function putOthello(col,row,player){
+function canPutOthello(col,row,player){
 
     var daiVal = canPutOthelloDiagonal(col,row,player);
     var rowVal = canPutOthelloRow(col,row,player);
     var colVal = canPutOthelloCol(col,row,player);
     var daiVal2 = canPutOthelloDiagonal2(col,row,player);
     return daiVal || daiVal2 || rowVal || colVal;
+
+
 }
 
 function canPutOthelloDiagonal2(col,row,player){
@@ -111,12 +92,8 @@ function canPutOthelloDiagonal2(col,row,player){
             board[i] = othelloBoardDia[i+1][i];
         }
     }
-
     //対戦相手を判定
-    if(player==1)
-        opponent=2;
-    else if(player==2)
-        opponent=1;
+    opponent = getOpponent(player);
 
     //すでにオセロが置かれている場合、falseを返す
     if(board[col]==player || board[col]==opponent){
@@ -183,12 +160,8 @@ function canPutOthelloDiagonal(col,row,player){
             board[i] = othelloBoard[i+1][i];
         }
     }
-
     //対戦相手を判定
-    if(player==1)
-        opponent=2;
-    else if(player==2)
-        opponent=1;
+    opponent = getOpponent(player);
 
     //すでにオセロが置かれている場合、falseを返す
     if(board[col]==player || board[col]==opponent){
@@ -243,10 +216,7 @@ function canPutOthelloRow(col,row,player){
         board[i] = othelloBoard[i][row]; 
     }
     //対戦相手を判定
-    if(player==1)
-        opponent=2;
-    else if(player==2)
-        opponent=1;
+    opponent = getOpponent(player);
 
     //すでにオセロが置かれている場合、falseを返す
     if(board[col]==player || board[col]==opponent){
@@ -298,10 +268,7 @@ function canPutOthelloCol(col,row,player){
     var rowJug = false;
 
     //対戦相手を判定
-    if(player==1)
-        opponent=2;
-    else if(player==2)
-        opponent=1;
+    opponent = getOpponent(player);
 
     //すでにオセロが置かれている場合、falseを返す
     if(board[row]==player || board[row]==opponent){
@@ -346,39 +313,81 @@ function canPutOthelloCol(col,row,player){
     return false;
 }
 
-function reflushBoardItem(boardSize){
-    settingBoard(boardSize);
+function turnOthello(){
 
-    for(col=0;col< othelloBoard.length;col++){
-        var board = othelloBoard[col];
-        for(row=0;row<board.length;row++){
-            if(board[row] == 1)
-                document.getElementById("btn"+col+row).innerHTML="○";
-            else if(board[row] == 2)
-                document.getElementById("btn"+col+row).innerHTML="●";
-            else
-                document.getElementById("btn"+col+row).innerHTML="　";
-        }
-    }
+}
+
+function putOthello(){
+
+}
+
+function reflushBoardItem(){
+    settingBoard(8);
+    drowOthello();
+}
+
+function getOpponent(player){
+    var opponent;
+
+    //対戦相手を判定
+    if(player==1)
+        opponent=2;
+    else if(player==2)
+        opponent=1;
+
+    return opponent;
+}
+
+function getOthelloPiece(player){
+    var piece;
+
+    //対戦相手を判定
+    if(player==1)
+        piece="○";
+    else if(player==2)
+        piece="●";
+    else
+        piece="　";
+    
+    return piece;
 }
 
 //Jasmineのtestにはexportが必要になるらしい
 exports.initBoard = initBoard;
 exports.getBoard = getBoard;
 exports.setBoard = setBoard;
-exports.changePlayer = changePlayer;
 exports.settingBoard = settingBoard;
+exports.canPutOthello = canPutOthello;
 exports.putOthello = putOthello;
+exports.getOpponent = getOpponent;
+exports.turnOthello = turnOthello;
+
+function drowOthello(){
+    for(col=0;col< othelloBoard.length;col++){
+        var board = othelloBoard[col];
+        for(row=0;row<board.length;row++){
+            document.getElementById("btn"+col+row).innerHTML=getOthelloPiece(board[row]);
+        }
+    }
+}
+
+function drowOpponent(player){
+    document.getElementById("Player").innerHTML = getOpponent(player);
+}
 
 //event
 function onbuttonClick(col,row){
     var playerNo = document.getElementById("Player").innerHTML;
 
-    var boardString = setBoard(col,row,playerNo);
-    document.getElementById("btn"+col+row).innerHTML=boardString;
+    //オセロが置けるか確認する
+    if(canPutOthello(col,row,playerNo)){
 
-    var nextPlayer = changePlayer(playerNo);
-    document.getElementById("Player").innerHTML=nextPlayer;
+        //オセロを置く
+        setBoard(col,row,playerNo);
+        drowOthello();
+
+        drowOpponent(playerNo);
+    }
 }
 
 function onLoad(){

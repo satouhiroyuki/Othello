@@ -38,12 +38,12 @@
     });
 
     //testCode
-    describe('this test is set Player2',function(){
+    describe('this test is get Opponent',function(){
         it('testCase', function(){
-            expect(testJs.changePlayer).toBeDefined();
+            expect(testJs.getOpponent).toBeDefined();
 
-            expect(testJs.changePlayer(2)).toBe(1);
-            expect(testJs.changePlayer(1)).toBe(2);
+            expect(testJs.getOpponent(2)).toBe(1);
+            expect(testJs.getOpponent(1)).toBe(2);
         });
     });
 
@@ -78,7 +78,7 @@
             testJs.initBoard(8);
             testJs.settingBoard(8);
 
-            expect(testJs.putOthello(7,7,1)).toBe(false);
+            expect(testJs.canPutOthello(7,7,1)).toBe(false);
         });
     });
     //testCode
@@ -86,29 +86,29 @@
         it('testCase', function(){
             testJs.initBoard(8);
             testJs.settingBoard(8);
-            expect(testJs.putOthello(2,2,1)).toBe(false);
-            expect(testJs.putOthello(2,3,1)).toBe(false);
-            expect(testJs.putOthello(2,4,1)).toBe(true);
-            expect(testJs.putOthello(2,5,1)).toBe(false);
-            expect(testJs.putOthello(2,6,1)).toBe(false);
+            expect(testJs.canPutOthello(2,2,1)).toBe(false);
+            expect(testJs.canPutOthello(2,3,1)).toBe(false);
+            expect(testJs.canPutOthello(2,4,1)).toBe(true);
+            expect(testJs.canPutOthello(2,5,1)).toBe(false);
+            expect(testJs.canPutOthello(2,6,1)).toBe(false);
 
-            expect(testJs.putOthello(3,2,1)).toBe(false);
-            expect(testJs.putOthello(3,3,1)).toBe(false);
-            expect(testJs.putOthello(3,4,1)).toBe(false);
-            expect(testJs.putOthello(3,5,1)).toBe(true);
-            expect(testJs.putOthello(3,6,1)).toBe(false);
+            expect(testJs.canPutOthello(3,2,1)).toBe(false);
+            expect(testJs.canPutOthello(3,3,1)).toBe(false);
+            expect(testJs.canPutOthello(3,4,1)).toBe(false);
+            expect(testJs.canPutOthello(3,5,1)).toBe(true);
+            expect(testJs.canPutOthello(3,6,1)).toBe(false);
 
-            expect(testJs.putOthello(4,2,1)).toBe(true);
-            expect(testJs.putOthello(4,3,1)).toBe(false);
-            expect(testJs.putOthello(4,4,1)).toBe(false);
-            expect(testJs.putOthello(4,5,1)).toBe(false);
-            expect(testJs.putOthello(4,6,1)).toBe(false);
+            expect(testJs.canPutOthello(4,2,1)).toBe(true);
+            expect(testJs.canPutOthello(4,3,1)).toBe(false);
+            expect(testJs.canPutOthello(4,4,1)).toBe(false);
+            expect(testJs.canPutOthello(4,5,1)).toBe(false);
+            expect(testJs.canPutOthello(4,6,1)).toBe(false);
 
-            expect(testJs.putOthello(5,2,1)).toBe(false);
-            expect(testJs.putOthello(5,3,1)).toBe(true);
-            expect(testJs.putOthello(5,4,1)).toBe(false);
-            expect(testJs.putOthello(5,5,1)).toBe(false);
-            expect(testJs.putOthello(5,6,1)).toBe(false);
+            expect(testJs.canPutOthello(5,2,1)).toBe(false);
+            expect(testJs.canPutOthello(5,3,1)).toBe(true);
+            expect(testJs.canPutOthello(5,4,1)).toBe(false);
+            expect(testJs.canPutOthello(5,5,1)).toBe(false);
+            expect(testJs.canPutOthello(5,6,1)).toBe(false);
         });
     });
     //testCode
@@ -119,29 +119,29 @@
             testJs.setBoard(4,4,2);
             testJs.setBoard(5,4,2);
 
-            expect(testJs.putOthello(2,2,1)).toBe(false);
-            expect(testJs.putOthello(2,3,1)).toBe(false);
-            expect(testJs.putOthello(2,4,1)).toBe(false);
-            expect(testJs.putOthello(2,5,1)).toBe(false);
-            expect(testJs.putOthello(2,6,1)).toBe(false);
+            expect(testJs.canPutOthello(2,2,1)).toBe(false);
+            expect(testJs.canPutOthello(2,3,1)).toBe(false);
+            expect(testJs.canPutOthello(2,4,1)).toBe(false);
+            expect(testJs.canPutOthello(2,5,1)).toBe(false);
+            expect(testJs.canPutOthello(2,6,1)).toBe(false);
 
-            expect(testJs.putOthello(3,2,1)).toBe(false);
-            expect(testJs.putOthello(3,3,1)).toBe(false);
-            expect(testJs.putOthello(3,4,1)).toBe(false);
-            expect(testJs.putOthello(3,5,1)).toBe(true);
-            expect(testJs.putOthello(3,6,1)).toBe(false);
+            expect(testJs.canPutOthello(3,2,1)).toBe(false);
+            expect(testJs.canPutOthello(3,3,1)).toBe(false);
+            expect(testJs.canPutOthello(3,4,1)).toBe(false);
+            expect(testJs.canPutOthello(3,5,1)).toBe(true);
+            expect(testJs.canPutOthello(3,6,1)).toBe(false);
 
-            expect(testJs.putOthello(4,2,1)).toBe(false);
-            expect(testJs.putOthello(4,3,1)).toBe(false);
-            expect(testJs.putOthello(4,4,1)).toBe(false);
-            expect(testJs.putOthello(4,5,1)).toBe(false);
-            expect(testJs.putOthello(4,6,1)).toBe(false);
+            expect(testJs.canPutOthello(4,2,1)).toBe(false);
+            expect(testJs.canPutOthello(4,3,1)).toBe(false);
+            expect(testJs.canPutOthello(4,4,1)).toBe(false);
+            expect(testJs.canPutOthello(4,5,1)).toBe(false);
+            expect(testJs.canPutOthello(4,6,1)).toBe(false);
 
-            expect(testJs.putOthello(5,2,1)).toBe(false);
-            expect(testJs.putOthello(5,3,1)).toBe(true);
-            expect(testJs.putOthello(5,4,1)).toBe(false);
-            expect(testJs.putOthello(5,5,1)).toBe(true);
-            expect(testJs.putOthello(5,6,1)).toBe(false);
+            expect(testJs.canPutOthello(5,2,1)).toBe(false);
+            expect(testJs.canPutOthello(5,3,1)).toBe(true);
+            expect(testJs.canPutOthello(5,4,1)).toBe(false);
+            expect(testJs.canPutOthello(5,5,1)).toBe(true);
+            expect(testJs.canPutOthello(5,6,1)).toBe(false);
         });
     });
     
@@ -153,29 +153,29 @@
             testJs.setBoard(2,3,2);
             testJs.setBoard(3,3,2);
 
-            expect(testJs.putOthello(2,2,1)).toBe(true);
-            expect(testJs.putOthello(2,3,1)).toBe(false);
-            expect(testJs.putOthello(2,4,1)).toBe(true);
-            expect(testJs.putOthello(2,5,1)).toBe(false);
-            expect(testJs.putOthello(2,6,1)).toBe(false);
+            expect(testJs.canPutOthello(2,2,1)).toBe(true);
+            expect(testJs.canPutOthello(2,3,1)).toBe(false);
+            expect(testJs.canPutOthello(2,4,1)).toBe(true);
+            expect(testJs.canPutOthello(2,5,1)).toBe(false);
+            expect(testJs.canPutOthello(2,6,1)).toBe(false);
 
-            expect(testJs.putOthello(3,2,1)).toBe(false);
-            expect(testJs.putOthello(3,3,1)).toBe(false);
-            expect(testJs.putOthello(3,4,1)).toBe(false);
-            expect(testJs.putOthello(3,5,1)).toBe(false);
-            expect(testJs.putOthello(3,6,1)).toBe(false);
+            expect(testJs.canPutOthello(3,2,1)).toBe(false);
+            expect(testJs.canPutOthello(3,3,1)).toBe(false);
+            expect(testJs.canPutOthello(3,4,1)).toBe(false);
+            expect(testJs.canPutOthello(3,5,1)).toBe(false);
+            expect(testJs.canPutOthello(3,6,1)).toBe(false);
 
-            expect(testJs.putOthello(4,2,1)).toBe(true);
-            expect(testJs.putOthello(4,3,1)).toBe(false);
-            expect(testJs.putOthello(4,4,1)).toBe(false);
-            expect(testJs.putOthello(4,5,1)).toBe(false);
-            expect(testJs.putOthello(4,6,1)).toBe(false);
+            expect(testJs.canPutOthello(4,2,1)).toBe(true);
+            expect(testJs.canPutOthello(4,3,1)).toBe(false);
+            expect(testJs.canPutOthello(4,4,1)).toBe(false);
+            expect(testJs.canPutOthello(4,5,1)).toBe(false);
+            expect(testJs.canPutOthello(4,6,1)).toBe(false);
 
-            expect(testJs.putOthello(5,2,1)).toBe(false);
-            expect(testJs.putOthello(5,3,1)).toBe(false);
-            expect(testJs.putOthello(5,4,1)).toBe(false);
-            expect(testJs.putOthello(5,5,1)).toBe(false);
-            expect(testJs.putOthello(5,6,1)).toBe(false);
+            expect(testJs.canPutOthello(5,2,1)).toBe(false);
+            expect(testJs.canPutOthello(5,3,1)).toBe(false);
+            expect(testJs.canPutOthello(5,4,1)).toBe(false);
+            expect(testJs.canPutOthello(5,5,1)).toBe(false);
+            expect(testJs.canPutOthello(5,6,1)).toBe(false);
         });
     });
     //testCode
@@ -186,29 +186,29 @@
             testJs.setBoard(2,4,1);
             testJs.setBoard(3,4,1);
 
-            expect(testJs.putOthello(2,2,2)).toBe(false);
-            expect(testJs.putOthello(2,3,2)).toBe(true);
-            expect(testJs.putOthello(2,4,2)).toBe(false);
-            expect(testJs.putOthello(2,5,2)).toBe(true);
-            expect(testJs.putOthello(2,6,2)).toBe(false);
+            expect(testJs.canPutOthello(2,2,2)).toBe(false);
+            expect(testJs.canPutOthello(2,3,2)).toBe(true);
+            expect(testJs.canPutOthello(2,4,2)).toBe(false);
+            expect(testJs.canPutOthello(2,5,2)).toBe(true);
+            expect(testJs.canPutOthello(2,6,2)).toBe(false);
 
-            expect(testJs.putOthello(3,2,2)).toBe(false);
-            expect(testJs.putOthello(3,3,2)).toBe(false);
-            expect(testJs.putOthello(3,4,2)).toBe(false);
-            expect(testJs.putOthello(3,5,2)).toBe(false);
-            expect(testJs.putOthello(3,6,2)).toBe(false);
+            expect(testJs.canPutOthello(3,2,2)).toBe(false);
+            expect(testJs.canPutOthello(3,3,2)).toBe(false);
+            expect(testJs.canPutOthello(3,4,2)).toBe(false);
+            expect(testJs.canPutOthello(3,5,2)).toBe(false);
+            expect(testJs.canPutOthello(3,6,2)).toBe(false);
 
-            expect(testJs.putOthello(4,2,2)).toBe(false);
-            expect(testJs.putOthello(4,3,2)).toBe(false);
-            expect(testJs.putOthello(4,4,2)).toBe(false);
-            expect(testJs.putOthello(4,5,2)).toBe(true);
-            expect(testJs.putOthello(4,6,2)).toBe(false);
+            expect(testJs.canPutOthello(4,2,2)).toBe(false);
+            expect(testJs.canPutOthello(4,3,2)).toBe(false);
+            expect(testJs.canPutOthello(4,4,2)).toBe(false);
+            expect(testJs.canPutOthello(4,5,2)).toBe(true);
+            expect(testJs.canPutOthello(4,6,2)).toBe(false);
 
-            expect(testJs.putOthello(5,2,2)).toBe(false);
-            expect(testJs.putOthello(5,3,2)).toBe(false);
-            expect(testJs.putOthello(5,4,2)).toBe(false);
-            expect(testJs.putOthello(5,5,2)).toBe(false);
-            expect(testJs.putOthello(5,6,2)).toBe(false);
+            expect(testJs.canPutOthello(5,2,2)).toBe(false);
+            expect(testJs.canPutOthello(5,3,2)).toBe(false);
+            expect(testJs.canPutOthello(5,4,2)).toBe(false);
+            expect(testJs.canPutOthello(5,5,2)).toBe(false);
+            expect(testJs.canPutOthello(5,6,2)).toBe(false);
         });
     });
 })();
