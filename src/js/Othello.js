@@ -45,6 +45,10 @@ function setBoard(col,row,player){
     othelloBoard[col][row] = player;
 }
 
+function getOthelloBoard(){
+    return othelloBoard;
+}
+
 function canPutOthello(col,row,player){
 
     var daiVal = canPutOthelloDiagonal(col,row,player);
@@ -313,12 +317,65 @@ function canPutOthelloCol(col,row,player){
     return false;
 }
 
+function setOthelloLineRow(row,line){
+    for(col=0;col<line.length;col++){
+        othelloBoard[col][row] = line[col];
+    }
+}
+
 function turnOthello(){
+
+    for(col=0;col<othelloBoard.length;col++){
+        var board = othelloBoard[col];
+        othelloBoard[col] = turnOthelloLine(board);
+    }
+
+    var line = new Array(othelloBoard.length);
+    for(row=0;row<othelloBoard.length;row++){
+        for(col=0;col<othelloBoard.length;col++){
+            var board = othelloBoard[col];
+            line[col] = board[row];
+        }
+        setOthelloLineRow(row,turnOthelloLine(board));
+    }
 
 }
 
-function putOthello(){
+function turnOthelloLine(board){
+    var line = new Array(board.length).fill(0);
+    var turnNo = 0;
+    var turnFlag = false;
+    var turn = false;
 
+    for(row=0;row<board.length;row++){
+        if(turn==false && board[row]!=0){
+            if(turnFlag == true && turnNo != board[row]){
+                line[row] = getOpponent(board[row]);
+            }
+            else if(turnFlag == true && turnNo == board[row]){
+                line[row] = board[row];
+                turn = true;
+            }
+            else if(turnFlag == false && turnNo != board[row]){
+                turnFlag = true;
+                turnNo = board[row];
+                line[row] = board[row];
+            }
+            else{
+                line[row] = board[row];
+            }
+        }
+        else{
+            line[row] = board[row];
+        }
+    }
+
+    if(turn){
+        return line;
+    }
+    else{
+        return board;
+    }
 }
 
 function reflushBoardItem(){
@@ -358,9 +415,11 @@ exports.getBoard = getBoard;
 exports.setBoard = setBoard;
 exports.settingBoard = settingBoard;
 exports.canPutOthello = canPutOthello;
-exports.putOthello = putOthello;
 exports.getOpponent = getOpponent;
 exports.turnOthello = turnOthello;
+exports.turnOthelloLine = turnOthelloLine;
+exports.setOthelloLineRow = setOthelloLineRow;
+exports.getOthelloBoard = getOthelloBoard;
 
 function drowOthello(){
     for(col=0;col< othelloBoard.length;col++){
@@ -384,8 +443,9 @@ function onbuttonClick(col,row){
 
         //オセロを置く
         setBoard(col,row,playerNo);
-        drowOthello();
+        turnOthello();
 
+        drowOthello();
         drowOpponent(playerNo);
     }
 }

@@ -211,4 +211,70 @@
             expect(testJs.canPutOthello(5,6,2)).toBe(false);
         });
     });
+    //testCode
+    describe('this test is turnOthello',function(){
+        it('testCase', function(){
+            testJs.initBoard(8);
+            testJs.settingBoard(8);
+
+            testJs.setBoard(3,5,1);
+
+            expect(testJs.turnOthello());
+            expect(testJs.getBoard(3,4,1)).toBe(1);
+
+        });
+    });
+    //testCode
+    describe('this test is turnOthelloLine',function(){
+        it('testCase', function(){
+            line = [0,1,2,2,2,2,2,1];
+            exp = [0,1,1,1,1,1,1,1];
+            
+            result = testJs.turnOthelloLine(col,line);
+
+            for(i=0;i<result.length;i++){
+                expect(result[i]).toEqual(exp[i]);
+            }
+        });
+    });
+    //testCode
+    describe('this test is turnOthelloLine',function(){
+        it('testCase', function(){
+            testJs.initBoard(8);
+            testJs.setBoard(0,2,0);
+            testJs.setBoard(1,2,1);
+            testJs.setBoard(2,2,2);
+            testJs.setBoard(3,2,2);
+            testJs.setBoard(4,2,2);
+            testJs.setBoard(5,2,2);
+            testJs.setBoard(6,2,2);
+            testJs.setBoard(7,2,1);
+
+            exp = [0,1,1,1,1,1,1,1];
+            
+            result = testJs.turnOthelloLine(2,line);
+
+            for(i=0;i<line.length;i++){
+                var othellowBoard = testJs.getOthelloBoard()
+                expect(othellowBoard[i][row]).toEqual(exp[i]);
+            }
+        });
+    });
+    //testCode
+    describe('this test is setOthelloLineRow',function(){
+        it('testCase', function(){
+            testJs.initBoard(8);
+
+            var line = [0,1,2,2,2,2,2,1];
+            var exp = [0,1,2,2,2,2,2,1];
+            var row = 2;
+            
+            result = testJs.setOthelloLineRow(row,line);
+
+            for(i=0;i<line.length;i++){
+                var othellowBoard = testJs.getOthelloBoard()
+                expect(othellowBoard[i][row]).toEqual(exp[i]);
+            }
+        });
+    });
 })();
