@@ -325,10 +325,6 @@ function setOthelloLineRow(row,line){
 
 function turnOthello(){
 
-    for(col=0;col<othelloBoard.length;col++){
-        var board = othelloBoard[col];
-        othelloBoard[col] = turnOthelloLine(board);
-    }
 
     var line = new Array(othelloBoard.length);
     for(row=0;row<othelloBoard.length;row++){
@@ -336,7 +332,12 @@ function turnOthello(){
             var board = othelloBoard[col];
             line[col] = board[row];
         }
-        setOthelloLineRow(row,turnOthelloLine(board));
+        setOthelloLineRow(row,turnOthelloLine(line));
+    }
+
+    for(col=0;col<othelloBoard.length;col++){
+        var board = othelloBoard[col];
+        othelloBoard[col] = turnOthelloLine(board);
     }
 
 }

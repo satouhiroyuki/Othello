@@ -252,11 +252,11 @@
 
             exp = [0,1,1,1,1,1,1,1];
             
-            result = testJs.turnOthelloLine(2,line);
+            testJs.turnOthello();
 
             for(i=0;i<line.length;i++){
                 var othellowBoard = testJs.getOthelloBoard()
-                expect(othellowBoard[i][row]).toEqual(exp[i]);
+                expect(othellowBoard[i][2]).toEqual(exp[i]);
             }
         });
     });
