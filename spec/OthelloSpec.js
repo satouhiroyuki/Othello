@@ -277,4 +277,54 @@
             }
         });
     });
+    //testCode
+    describe('this test is canPutOthello',function(){
+        it('testCase:Diagonal', function(){
+            testJs.initBoard(8);
+            testJs.settingBoard(8);
+            testJs.setBoard(4,4,2);
+            testJs.setBoard(5,4,2);
+            testJs.setBoard(5,5,1);
+
+            exp4 = [0,0,0,2,1,2,0,0];
+            exp5 = [0,0,0,0,0,1,0,0];
+
+            testJs.turnOthello();
+
+            for(i=0;i<line.length;i++){
+                var othellowBoard = testJs.getOthelloBoard()
+                expect(othellowBoard[i][4]).toEqual(exp4[i]);
+            }
+            for(i=0;i<line.length;i++){
+                var othellowBoard = testJs.getOthelloBoard()
+                console.log();
+                expect(othellowBoard[i][5]).toEqual(exp5[i]);
+            }
+        });
+    });
+    //testCode
+    describe('this test is canPutOthello',function(){
+        it('testCase:Diagonal', function(){
+            testJs.initBoard(8);
+            testJs.settingBoard(8);
+            testJs.setBoard(5,4,1);
+            testJs.setBoard(6,5,2);
+
+            exp4 = [0,0,0,2,1,2,0,0];
+            exp5 = [0,0,0,0,0,0,2,0];
+
+            testJs.turnOthello();
+
+            for(i=0;i<line.length;i++){
+                var othellowBoard = testJs.getOthelloBoard()
+                //console.log(i + " 4 " + ":"+ othellowBoard[i][4] + ":" +exp4[i]);
+                expect(othellowBoard[i][4]).toEqual(exp4[i]);
+            }
+            for(i=0;i<line.length;i++){
+                var othellowBoard = testJs.getOthelloBoard()
+                //console.log(i + " 5" + ":"+ othellowBoard[i][5] + ":" +exp5[i]);
+                expect(othellowBoard[i][5]).toEqual(exp5[i]);
+            }
+        });
+    });
 })();

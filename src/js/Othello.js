@@ -322,6 +322,16 @@ function setOthelloLineRow(row,line){
         othelloBoard[col][row] = line[col];
     }
 }
+function setOthelloLineDiaRow(row,line){
+    for(col=0;col<line.length;col++){
+        othelloBoard[col][col+row] = line[col];
+    }
+}
+function setOthelloLineDiaCol(row,line){
+    for(col=0;col<line.length;col++){
+        othelloBoard[col+row][col] = line[col];
+    }
+}
 
 function turnOthello(){
 
@@ -330,20 +340,40 @@ function turnOthello(){
         othelloBoard[col] = turnOthelloLine(board);
     }
 
-    var line = new Array(othelloBoard.length);
-
     //縦方向のチェック
     for(rows=0;rows<othelloBoard.length;rows++){
+        var line = new Array(othelloBoard.length);
         for(col=0;col<othelloBoard.length;col++){
             var board = othelloBoard[col];
-            console.log("col:"+ col +" rows:"+rows+" board:"+board[rows]);
             line[col] = board[rows];
         }
         setOthelloLineRow(rows,turnOthelloLine(line));
-        console.log("end:" + rows);
     }
 
-    console.log("end");
+    
+    //斜め方向の左上から右下のチェック
+    for(rows=0;rows<othelloBoard.length;rows++){
+        var line = new Array(othelloBoard.length-rows);
+
+        for(col=0;col<othelloBoard.length-rows;col++){
+            var board = othelloBoard[col];
+            line[col] = board[col+rows];
+        }
+        setOthelloLineDiaRow(rows,turnOthelloLine(line));
+    }
+
+    //斜め方向の左上から右下のチェック
+    for(cols=0;cols<othelloBoard.length;cols++){
+        var line = new Array(othelloBoard.length-cols);
+
+        for(row=0;row<othelloBoard.length-cols;row++){
+            var board = othelloBoard[row+cols];
+            line[row] = board[row];
+            console.log("Dia:"+cols+" col:"+ row +" rows:"+(row+cols)+" board:"+board[(row+cols)]);
+        }
+        setOthelloLineDiaCol(cols,turnOthelloLine(line));
+    }
+
 }
 
 function turnOthelloLine(board){
