@@ -325,21 +325,25 @@ function setOthelloLineRow(row,line){
 
 function turnOthello(){
 
-
-    var line = new Array(othelloBoard.length);
-    for(row=0;row<othelloBoard.length;row++){
-        for(col=0;col<othelloBoard.length;col++){
-            var board = othelloBoard[col];
-            line[col] = board[row];
-        }
-        setOthelloLineRow(row,turnOthelloLine(line));
-    }
-
     for(col=0;col<othelloBoard.length;col++){
         var board = othelloBoard[col];
         othelloBoard[col] = turnOthelloLine(board);
     }
 
+    var line = new Array(othelloBoard.length);
+
+    //縦方向のチェック
+    for(rows=0;rows<othelloBoard.length;rows++){
+        for(col=0;col<othelloBoard.length;col++){
+            var board = othelloBoard[col];
+            console.log("col:"+ col +" rows:"+rows+" board:"+board[rows]);
+            line[col] = board[rows];
+        }
+        setOthelloLineRow(rows,turnOthelloLine(line));
+        console.log("end:" + rows);
+    }
+
+    console.log("end");
 }
 
 function turnOthelloLine(board){
@@ -352,22 +356,27 @@ function turnOthelloLine(board){
         if(turn==false && board[row]!=0){
             if(turnFlag == true && turnNo != board[row]){
                 line[row] = getOpponent(board[row]);
+                console.log("turnFlag == true && turnNo != board[row]:"+line[row]);
             }
             else if(turnFlag == true && turnNo == board[row]){
                 line[row] = board[row];
                 turn = true;
+                console.log("turnFlag == true && turnNo == board[row]:"+line[row]);
             }
             else if(turnFlag == false && turnNo != board[row]){
                 turnFlag = true;
                 turnNo = board[row];
                 line[row] = board[row];
+                console.log("turnFlag == false && turnNo != board[row]:"+line[row]);
             }
             else{
                 line[row] = board[row];
+                console.log("turnFlag:"+line[row]);
             }
         }
         else{
             line[row] = board[row];
+            console.log("Turn:else:"+line[row]);
         }
     }
 
