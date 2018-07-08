@@ -356,15 +356,13 @@ function setOthelloLineDia2Col(temp,cols,line){
     for(col=0;col<line.length;col++){
         temp[col+cols][col] = line[col];
     }
-
-    
     //y軸を対象に射影して、判定ロジックをDiagonalと同じくする
-    var othelloBoardDia = new Array(temp[row].length);
+    var othelloBoardDia = new Array(temp[cols].length);
 
-    for(num=0;num<temp[row].length;num++){
+    for(num=0;num<temp[cols].length;num++){
         var j=0;
         var tempBoard = new Array(temp[num].length);
-        for(i=temp[row].length-1;0<=i;i--){
+        for(i=temp[cols].length-1;0<=i;i--){
             tempBoard[j] = temp[num][i];
             j++;
         }
@@ -446,7 +444,6 @@ function turnOthello(){
         console.log("tempa"+col+":"+ othelloBoardDia[col]);
     }
     
-    /*
     //斜め方向の左上から右下のチェック
     for(cols=0;cols<othelloBoardDia.length;cols++){
         var line = new Array(othelloBoardDia.length-cols);
@@ -458,8 +455,6 @@ function turnOthello(){
         }
         setOthelloLineDia2Col(othelloBoardDia.slice(),cols,turnOthelloLine(line));
     }
-    */
-
 }
 
 function turnOthelloLine(board){
