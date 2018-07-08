@@ -67,7 +67,7 @@ function canPutOthelloDiagonal2(col,row,player){
     for(num=0;num<othelloBoard[col].length;num++){
         var j=0;
         var tempBoard = new Array(othelloBoard[num].length);
-        for(i=othelloBoard[col].length-1;0<i;i--){
+        for(i=othelloBoard[col].length-1;0<=i;i--){
             tempBoard[j] = othelloBoard[num][i];
             j++;
         }
@@ -332,6 +332,48 @@ function setOthelloLineDiaCol(row,line){
         othelloBoard[col+row][col] = line[col];
     }
 }
+function setOthelloLineDia2Row(temp,row,line){
+
+    for(col=0;col<line.length;col++){
+        temp[col][col+row] = line[col];
+    }
+
+    //y軸を対象に射影して、判定ロジックをDiagonalと同じくする
+    var othelloBoardDia = new Array(temp[row].length);
+
+    for(num=0;num<temp[row].length;num++){
+        var j=0;
+        var tempBoard = new Array(temp[num].length);
+        for(i=temp[row].length-1;0<=i;i--){
+            tempBoard[j] = temp[num][i];
+            j++;
+        }
+        othelloBoardDia[num] = tempBoard;
+    } 
+    othelloBoard = othelloBoardDia;
+}
+function setOthelloLineDia2Col(temp,cols,line){
+    for(col=0;col<line.length;col++){
+        temp[col+cols][col] = line[col];
+    }
+
+    
+    //y軸を対象に射影して、判定ロジックをDiagonalと同じくする
+    var othelloBoardDia = new Array(temp[row].length);
+
+    for(num=0;num<temp[row].length;num++){
+        var j=0;
+        var tempBoard = new Array(temp[num].length);
+        for(i=temp[row].length-1;0<=i;i--){
+            tempBoard[j] = temp[num][i];
+            j++;
+        }
+        othelloBoardDia[num] = tempBoard;
+    } 
+
+    othelloBoard = othelloBoardDia;
+    
+}
 
 function turnOthello(){
 
@@ -369,10 +411,54 @@ function turnOthello(){
         for(row=0;row<othelloBoard.length-cols;row++){
             var board = othelloBoard[row+cols];
             line[row] = board[row];
-            console.log("Dia:"+cols+" col:"+ row +" rows:"+(row+cols)+" board:"+board[(row+cols)]);
         }
         setOthelloLineDiaCol(cols,turnOthelloLine(line));
     }
+
+    //y軸を対象に射影して、判定ロジックをDiagonalと同じくする
+    var othelloBoardDia = new Array(othelloBoard[col].length);
+
+    for(num=0;num<othelloBoard[col].length;num++){
+        var j=0;
+        var tempBoard = new Array(othelloBoard[num].length);
+        for(i=othelloBoard[col].length-1;0<=i;i--){
+            tempBoard[j] = othelloBoard[num][i];
+            j++;
+        }
+        othelloBoardDia[num] = tempBoard;
+    } 
+    for(col=0;col<othelloBoard.length;col++){
+        console.log("tempb"+col+":"+ othelloBoard[col]);
+    }
+    
+    //斜め方向の右上から左下のチェック
+    for(rows=0;rows<othelloBoardDia.length;rows++){
+        var line = new Array(othelloBoardDia.length-rows);
+
+        for(col=0;col<othelloBoardDia.length-rows;col++){
+            var board = othelloBoardDia[col];
+            line[col] = board[col+rows];
+        }
+        setOthelloLineDia2Row(othelloBoardDia.slice(),rows,turnOthelloLine(line));
+    }
+
+    for(col=0;col<othelloBoardDia.length;col++){
+        console.log("tempa"+col+":"+ othelloBoardDia[col]);
+    }
+    
+    /*
+    //斜め方向の左上から右下のチェック
+    for(cols=0;cols<othelloBoardDia.length;cols++){
+        var line = new Array(othelloBoardDia.length-cols);
+
+        for(row=0;row<othelloBoardDia.length-cols;row++){
+            var board = othelloBoardDia[row+cols];
+            line[row] = board[row];
+            console.log("Dia:"+cols+" col:"+ row +" rows:"+(row+cols)+" board:"+board[(row+cols)]);
+        }
+        setOthelloLineDia2Col(othelloBoardDia.slice(),cols,turnOthelloLine(line));
+    }
+    */
 
 }
 
@@ -386,27 +472,22 @@ function turnOthelloLine(board){
         if(turn==false && board[row]!=0){
             if(turnFlag == true && turnNo != board[row]){
                 line[row] = getOpponent(board[row]);
-                console.log("turnFlag == true && turnNo != board[row]:"+line[row]);
             }
             else if(turnFlag == true && turnNo == board[row]){
                 line[row] = board[row];
                 turn = true;
-                console.log("turnFlag == true && turnNo == board[row]:"+line[row]);
             }
             else if(turnFlag == false && turnNo != board[row]){
                 turnFlag = true;
                 turnNo = board[row];
                 line[row] = board[row];
-                console.log("turnFlag == false && turnNo != board[row]:"+line[row]);
             }
             else{
                 line[row] = board[row];
-                console.log("turnFlag:"+line[row]);
             }
         }
         else{
             line[row] = board[row];
-            console.log("Turn:else:"+line[row]);
         }
     }
 
@@ -482,6 +563,7 @@ function onbuttonClick(col,row){
     if(canPutOthello(col,row,playerNo)){
 
         //オセロを置く
+        console.log("col:"+col+" row:"+row+" player:"+playerNo);
         setBoard(col,row,playerNo);
         turnOthello();
 
