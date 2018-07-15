@@ -225,6 +225,18 @@
         });
     });
     //testCode
+    describe('this test is getPlayersOthello',function(){
+        it('testCase', function(){
+            testJs.initBoard(8);
+            testJs.settingBoard(8);
+
+            testJs.setBoard(3,5,1);
+
+            expect(testJs.getPlayersOthello(1)).toBe(3);
+            expect(testJs.getPlayersOthello(2)).toBe(2);
+        });
+    });
+    //testCode
     describe('this test is turnOthelloLine',function(){
         it('testCase', function(){
             line = [0,1,2,2,2,2,2,1];
