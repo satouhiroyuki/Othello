@@ -1,5 +1,5 @@
 (function(){
-    var testJs = require('../src/js/Othello');
+    var testJs = require('../Othello');
 
     //testCode
     describe('this test is Othello.js',function(){
