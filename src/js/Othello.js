@@ -525,6 +525,20 @@ function getOthelloPiece(player){
     return piece;
 }
 
+function getPlayersOthello(player){
+    var countNumber = 0;
+
+    for(col=0;col<othelloBoard.length;col++){
+        var board = othelloBoard[col];
+        for(row=0;row<board.length;row++){
+            if(board[row] == player){
+                countNumber++;
+            }
+        }
+    }
+    return countNumber;
+}
+
 //Jasmineのtestにはexportが必要になるらしい
 exports.initBoard = initBoard;
 exports.getBoard = getBoard;
@@ -536,6 +550,7 @@ exports.turnOthello = turnOthello;
 exports.turnOthelloLine = turnOthelloLine;
 exports.setOthelloLineRow = setOthelloLineRow;
 exports.getOthelloBoard = getOthelloBoard;
+exports.getPlayersOthello = getPlayersOthello;
 
 function drowOthello(){
     for(col=0;col< othelloBoard.length;col++){
@@ -548,6 +563,10 @@ function drowOthello(){
 
 function drowOpponent(player){
     document.getElementById("Player").innerHTML = getOpponent(player);
+}
+function drowPlayersOthello(){
+    document.getElementById("Player1_othello").innerHTML = getPlayersOthello(1);
+    document.getElementById("Player2_othello").innerHTML = getPlayersOthello(2);
 }
 
 //event
@@ -564,10 +583,16 @@ function onbuttonClick(col,row){
 
         drowOthello();
         drowOpponent(playerNo);
+
+        //プレイヤーの現在のオセロの枚数を表示
+        drowPlayersOthello();
     }
 }
 
 function onLoad(){
     reflushBoardItem();
+
+    //プレイヤーの現在のオセロの枚数を表示
+    drowPlayersOthello();
 }
 
