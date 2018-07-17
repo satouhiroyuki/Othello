@@ -561,6 +561,9 @@ function drowOthello(){
     }
 }
 
+function reflushPlayer(){
+    document.getElementById("Player").innerHTML = 1;
+}
 function drowOpponent(player){
     document.getElementById("Player").innerHTML = getOpponent(player);
 }
@@ -591,6 +594,7 @@ function onbuttonClick(col,row){
 
 function onLoad(){
     reflushBoardItem();
+    reflushPlayer();
 
     //プレイヤーの現在のオセロの枚数を表示
     drowPlayersOthello();
